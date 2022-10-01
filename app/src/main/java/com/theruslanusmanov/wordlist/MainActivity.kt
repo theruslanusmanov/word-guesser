@@ -17,6 +17,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -66,10 +67,35 @@ fun WordPic(image: Painter) {
         Text(
             text = "Guess the word",
             modifier = Modifier.padding(25.dp),
-            fontWeight = FontWeight(500),
+            fontWeight = FontWeight(700),
             color = Color.Gray
         )
+
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.SpaceAround
+        ) {
+            Word("Watermelon")
+            Word("Watermelon")
+            Word("Watermelon")
+            Word("Watermelon")
+        }
     }
+}
+
+@Composable
+fun Word(word: String) {
+    Text(
+        text = word,
+        modifier = Modifier
+            .width(width = 250.dp)
+            .padding(5.dp)
+            .border(width = 2.dp, color = Color.LightGray, shape = RoundedCornerShape(12))
+            .padding(10.dp),
+        fontWeight = FontWeight(700),
+        color = Color.Gray,
+        textAlign = TextAlign.Center
+    )
 }
 
 @Preview(showBackground = true)
@@ -78,5 +104,6 @@ fun DefaultPreview() {
     WordListTheme {
         val image: Painter = painterResource(id = R.drawable.watermelon)
         WordPic(image)
+        Word("Watermelon")
     }
 }
