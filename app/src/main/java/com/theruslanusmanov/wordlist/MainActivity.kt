@@ -1,5 +1,6 @@
 package com.theruslanusmanov.wordlist
 
+import android.R.raw
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
@@ -23,8 +24,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.google.gson.Gson
 import com.theruslanusmanov.wordlist.ui.theme.WordListTheme
+import java.io.BufferedReader
+import java.io.InputStreamReader
+import java.io.Reader
 
-data class Wordlist (
+
+data class Wordlist(
     val image: String,
     val words: List<String>,
     val correct: Long
@@ -34,9 +39,10 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val wordlistRaw = resources.openRawResource(R.raw.wordlist).toString()
-        val obj = Gson().fromJson(wordlistRaw, String::class.java)
-        Log.d("gson_obj", obj.toString())
+        val wordlistRaw = resources.openRawResource(R.raw.wordlist)
+        val rd: Reader = BufferedReader(InputStreamReader(wordlistRaw))
+        val obj = Gson().fromJson(rd, Array<Wordlist>::class.java)
+        Log.d("gson_obj", obj.contentToString())
 
 
         setContent {
