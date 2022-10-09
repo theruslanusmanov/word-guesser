@@ -1,0 +1,22 @@
+[
+  {
+    "image": "watermelon.png",
+    "words": [
+      "Watermelon",
+      "Watermelon",
+      "Watermelon",
+      "Watermelon"
+    ],
+    "correct": 0
+  },
+  {
+    "image": "apple.png",
+    "words": [
+      "Apple",
+      "Apple",
+      "Apple",
+      "Apple"
+    ],
+    "correct": 1
+  }
+]

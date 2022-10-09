@@ -1,6 +1,7 @@
 package com.theruslanusmanov.wordlist
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
@@ -19,13 +20,25 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.google.gson.Gson
 import com.theruslanusmanov.wordlist.ui.theme.WordListTheme
+
+data class Wordlist (
+    val image: String,
+    val words: List<String>,
+    val correct: Long
+)
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        val wordlistRaw = resources.openRawResource(R.raw.wordlist).toString()
+        val obj = Gson().fromJson(wordlistRaw, String::class.java)
+        Log.d("gson_obj", obj.toString())
+
+
         setContent {
             WordListTheme {
                 // A surface container using the 'background' color from the theme
