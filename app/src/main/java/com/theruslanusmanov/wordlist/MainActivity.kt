@@ -1,6 +1,5 @@
 package com.theruslanusmanov.wordlist
 
-import android.R.raw
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
@@ -42,7 +41,13 @@ class MainActivity : ComponentActivity() {
         val wordlistRaw = resources.openRawResource(R.raw.wordlist)
         val rd: Reader = BufferedReader(InputStreamReader(wordlistRaw))
         val obj = Gson().fromJson(rd, Array<Wordlist>::class.java)
-        Log.d("gson_obj", obj.contentToString())
+
+        // Get the Wordlist objects array
+        for (item in obj) {
+            Log.d("gson_obj", item.words.toString())
+        }
+
+        val index = 0
 
 
         setContent {
@@ -57,8 +62,8 @@ class MainActivity : ComponentActivity() {
                         horizontalAlignment = Alignment.CenterHorizontally,
                         verticalArrangement = Arrangement.SpaceAround
                     ) {
-                        val image: Painter = painterResource(id = R.drawable.watermelon)
-                        WordPic(image)
+                        val imageId = resources.getIdentifier(obj[index].image, "drawable", packageName)
+                        Wordlist(imageId)
                     }
                 }
             }
@@ -67,22 +72,28 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun WordPic(image: Painter) {
+fun Picture(imageId: Int) {
+    Box(
+        modifier = Modifier
+            .border(width = 2.dp, color = Color.LightGray, shape = RoundedCornerShape(12))
+            .padding(25.dp)
+    ) {
+        val image: Painter = painterResource(id = imageId)
+        Image(
+            painter = image, contentDescription = "", modifier = Modifier
+                .width(50.dp)
+                .height(50.dp)
+        )
+    }
+}
+
+@Composable
+fun Wordlist(imageId: Int) {
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.SpaceAround,
     ) {
-        Box(
-            modifier = Modifier
-                .border(width = 2.dp, color = Color.LightGray, shape = RoundedCornerShape(12))
-                .padding(25.dp)
-        ) {
-            Image(
-                painter = image, contentDescription = "", modifier = Modifier
-                    .width(50.dp)
-                    .height(50.dp)
-            )
-        }
+        Picture(imageId)
         Text(
             text = "Guess the word",
             modifier = Modifier.padding(25.dp),
@@ -121,8 +132,6 @@ fun Word(word: String) {
 @Composable
 fun DefaultPreview() {
     WordListTheme {
-        val image: Painter = painterResource(id = R.drawable.watermelon)
-        WordPic(image)
         Word("Watermelon")
     }
 }

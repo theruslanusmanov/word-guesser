@@ -1,6 +1,6 @@
 [
   {
-    "image": "watermelon.png",
+    "image": "watermelon",
     "words": [
       "Watermelon",
       "Watermelon",
@@ -10,7 +10,7 @@
     "correct": 0
   },
   {
-    "image": "apple.png",
+    "image": "apple",
     "words": [
       "Apple",
       "Apple",
