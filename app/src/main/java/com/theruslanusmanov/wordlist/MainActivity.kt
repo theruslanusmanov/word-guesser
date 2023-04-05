@@ -18,10 +18,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.google.gson.Gson
+import com.theruslanusmanov.wordlist.question.Question
 import com.theruslanusmanov.wordlist.ui.theme.WordListTheme
 import java.io.BufferedReader
 import java.io.InputStreamReader
@@ -48,7 +48,6 @@ class MainActivity : ComponentActivity() {
         }
 
         val index = 0
-
 
         setContent {
             WordListTheme {
@@ -105,33 +104,23 @@ fun Wordlist(imageId: Int) {
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.SpaceAround
         ) {
-            Word("Watermelon")
-            Word("Watermelon")
-            Word("Watermelon")
-            Word("Watermelon")
+            Question(
+                possibleAnswers = listOf("apple", "grapes", "lemon", "watermelon"),
+                selectedAnswers = listOf("apple", "grapes", "lemon", "watermelon"),
+                onOptionSelected = { _, _ ->  }
+            )
         }
     }
-}
-
-@Composable
-fun Word(word: String) {
-    Text(
-        text = word,
-        modifier = Modifier
-            .width(width = 250.dp)
-            .padding(5.dp)
-            .border(width = 2.dp, color = Color.LightGray, shape = RoundedCornerShape(12))
-            .padding(10.dp),
-        fontWeight = FontWeight(700),
-        color = Color.Gray,
-        textAlign = TextAlign.Center
-    )
 }
 
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
     WordListTheme {
-        Word("Watermelon")
+        Question(
+            possibleAnswers = listOf("apple", "grapes", "lemon", "watermelon"),
+            selectedAnswers = listOf("apple", "grapes", "lemon", "watermelon"),
+            onOptionSelected = { _, _ ->  }
+        )
     }
 }
