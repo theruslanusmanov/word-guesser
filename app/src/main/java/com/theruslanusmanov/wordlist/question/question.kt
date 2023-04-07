@@ -8,7 +8,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.material.primarySurface
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
@@ -37,7 +37,7 @@ fun Word(
         },
         textAlign = TextAlign.Center,
 
-    )
+        )
 }
 
 
@@ -45,10 +45,10 @@ fun Word(
 fun Question(
     possibleAnswers: List<String>,
     selectedAnswers: List<String>,
-    onOptionSelected: (selected: Boolean, answer: String) -> Unit,
+    onOptionSelected: (answer: String) -> Unit,
 ) {
     possibleAnswers.forEach {
         val selected = selectedAnswers.contains(it)
-        Word(word = it, true, onOptionSelected = { onOptionSelected(!selected, it) })
+        Word(word = it, true, onOptionSelected = { onOptionSelected(it) })
     }
 }

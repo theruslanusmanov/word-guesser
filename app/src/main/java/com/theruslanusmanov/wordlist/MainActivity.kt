@@ -107,7 +107,7 @@ fun Wordlist(imageId: Int) {
             Question(
                 possibleAnswers = listOf("apple", "grapes", "lemon", "watermelon"),
                 selectedAnswers = listOf("apple", "grapes", "lemon", "watermelon"),
-                onOptionSelected = { _, _ ->  }
+                onOptionSelected = { _ -> Log.d("SELECTED", "CLICKED"); }
             )
         }
     }
@@ -120,7 +120,7 @@ fun DefaultPreview() {
         Question(
             possibleAnswers = listOf("apple", "grapes", "lemon", "watermelon"),
             selectedAnswers = listOf("apple", "grapes", "lemon", "watermelon"),
-            onOptionSelected = { _, _ ->  }
+            onOptionSelected = { _ ->  }
         )
     }
 }
